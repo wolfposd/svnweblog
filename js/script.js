@@ -76,14 +76,12 @@ function sidebar(groupid)
 
             $.get("template/revision.html", function(revision)
             {
-              $insafter = $(".row.well");
               $.each(json.logentry, function(index, logentry)
               {
                   var jqob = $.parseHTML(revision.replaceAll("{{increment}}", index));
                   autoJSON(jqob, logentry);
             
                   var ulist = $(jqob).find("ul.list-group");
-            
                   $.each(logentry.paths.path, function(index, path)
                   {
                       $(ulist).append(
