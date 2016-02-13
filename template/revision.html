@@ -1,0 +1,32 @@
+<div class="panel-group" id="accordion{{increment}}>" role="tablist" aria-multiselectable="true">
+	<div class="panel panel-default">
+		<div class="panel-heading" role="tab" id="headingOne">
+			<h4 class="panel-title">Revision: <span class="autojson" data-autojson="attributes.revision"></span></h4>
+        <div class="row">
+			<div class="col-sm-4 col-md-3">
+				<p><b class="autojson" data-autojson="author"></b></p>
+       	        <p class="autojson" data-autojson="date"></p>
+       	    </div>
+       	    <div class="col-sm-8 col-md-9">
+           	    <p>Message: <span class="autojson" data-autojson="msg"></span></p>
+           	    <p>Touched Files: <span class="autojson" data-autojson="paths.path.length"></span></p>
+       	   </div>
+        </div>
+        <div class="row">
+			<div class="col-xs-6">
+				<a role="button" onclick="chevron(this);"  data-toggle="collapse" data-parent="#accordion{{increment}}" 
+              	  href="#collapse{{increment}}" aria-expanded="true" aria-controls="collapse{{increment}}">
+                 Modified Files <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+   	        </div>
+        </div>
+        </div>
+        <div id="collapse{{increment}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+			<div class="panel-body" style="max-height: 300px;overflow-y: scroll;">
+				<ul class="list-group">
+           			<!-- INSERT LIST HERE -->
+           		</ul>
+         	</div>
+        </div>
+	</div>
+</div>
