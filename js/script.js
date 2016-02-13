@@ -160,7 +160,6 @@ function colorStyleForCommitType(commitType)
 function randomRGB(string)
 {
     var res = "#" + ("" + hashCode(string)).substring(0, 6);
-    console.log(res);
     return res;
 }
 

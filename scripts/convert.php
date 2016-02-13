@@ -170,7 +170,19 @@ function fixPathArray(&$json)
                     $logentry["paths"]["path"]
             );
         }
+        $logentry["date"] = convertDates($logentry["date"]);
     }
+}
+
+function convertDates($date)
+{
+    $date = strtotime($date);
+    $time = date("H:i:s", $date);
+    $day = date("d.m.Y", $date);
+    return [
+            "time" => $time,
+            "date" => $day
+    ];
 }
 
 ?>
