@@ -16,9 +16,16 @@
     			<ul class="sidebar-nav">
     				<li class="sidebar-brand" style="color: white;"><a href="">SVN Overview</a></li>
                     
-                    <?php for ($i = 0 ; $i <= 19 ; $i++) {?>
-    	            <li><a href="#<?php echo $i?>" onclick="sidebar(<?php echo $i;?>);">Group <?php echo $i?></a></li>
-                    <?php }?>
+                    <?php 
+                    $countfiles = count(scandir("xml"))-2;
+                    for ($i = 0 ; $i < $countfiles ; $i++) {?>
+    	            	<li><a href="#<?php echo $i?>" onclick="sidebar(<?php echo $i;?>);">Group <?php echo $i?></a></li>
+                    <?php 
+                        if( $i % 4 == 0)
+                        {
+                            echo "<hr>";
+                        }
+                    }?>
     
                 </ul>
     		</div>
