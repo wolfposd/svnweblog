@@ -31,7 +31,7 @@ function sidebar(groupid)
         var content = $("#page-content-wrapper");
         if (json.authorinfo.length == 0)
         {
-            showWarning(content, "File not found");
+            showWarning(content, "SVN Log Empty");
             return;
         }
 
