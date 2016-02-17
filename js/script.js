@@ -1,3 +1,6 @@
+
+var DATENOW = new Date().getTime();
+
 $(document).ready(function()
 {
     var hash = window.location.hash.substring(1);
@@ -36,7 +39,7 @@ function sidebar(groupid)
         }
 
         $(content).html("");
-        $.get("template/overview.html", function(overviewtemplate)
+        $.get("template/overview.html?s="+DATENOW, function(overviewtemplate)
         {
             $.each(json.authorinfo, function(index, info)
             {
@@ -74,7 +77,7 @@ function sidebar(groupid)
             var ctx = document.getElementById("chart-area").getContext("2d");
             window.myPie = new Chart(ctx).Pie(pieData, options);
 
-            $.get("template/revision.html", function(revision)
+            $.get("template/revision.html?s="+DATENOW, function(revision)
             {
               $.each(json.logentry, function(index, logentry)
               {
