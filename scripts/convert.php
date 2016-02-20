@@ -95,6 +95,7 @@ function handleXML($json)
     }
     
     $json["authorinfo"] = $finalAuthors;
+    $json["lastupdated"] = date("G:i:s d.m.Y");
     
     return $json;
 }
