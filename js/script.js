@@ -41,6 +41,7 @@ function sidebar(groupid)
         $(content).html("");
         $.get("template/overview.html?s="+DATENOW, function(overviewtemplate)
         {
+            $(content).append('<div class="authorinfo">Last Updated:'+ json.lastupdated + '</div>')
             $.each(json.authorinfo, function(index, info)
             {
                 var tmp = $.parseHTML(overviewtemplate);
