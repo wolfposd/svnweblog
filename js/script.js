@@ -90,7 +90,7 @@ function sidebar(groupid)
         });
     }).fail(function()
     {
-        showWarning("#page-content-wrapper", "File not found");
+        showWarning("File not found");
     });
 
 }
