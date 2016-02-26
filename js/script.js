@@ -1,6 +1,10 @@
 
 var DATENOW = new Date().getTime();
 
+var groupnames = {};
+$.getJSON("svninfo.json", function(json){
+    groupnames = json;
+});
 $(document).ready(function()
 {
     var hash = window.location.hash.substring(1);
@@ -24,59 +28,45 @@ function chevron(handle)
 
 function sidebar(groupid)
 {
-    $("#page-content-wrapper").html("<h1>Loading...</h1>");
+    $("#message").show().html("<h1>Loading...</h1>");
     $("#warning").hide();
+    $("#userrevcontent").hide();
+    emptyUserRevision();
     if (groupid < 10)
         groupid = "0" + groupid;
 
     $.getJSON("xml/mc" + groupid + ".json", function(json)
     {
-        var content = $("#page-content-wrapper");
         if (json.authorinfo.length == 0)
         {
-            showWarning(content, "SVN Log Empty");
+            $("#message").hide().html("");
+            showWarning("SVN Log Empty");
             return;
         }
-
-        $(content).html("");
+        
         $.get("template/overview.html?s="+DATENOW, function(overviewtemplate)
         {
-            $(content).append('<div class="authorinfo">Last Updated:'+ json.lastupdated + '</div>')
+            if (groupnames.groups != null)
+            {
+                $("#groupname").html(groupnames.groups[parseInt(groupid,10)])
+            }
+            else
+            {
+                $("#groupname").html("");
+            }
+            
+            $("#lastupdatedsvn").html('Last Updated:'+ json.lastupdated);
             $.each(json.authorinfo, function(index, info)
             {
                 var tmp = $.parseHTML(overviewtemplate);
                 $(tmp).find(".gravatar").attr("src", info.gravatar);
                 autoJSON(tmp, info);
-                $(content).append(tmp);
+                $("#authortags").append(tmp);
             });
+            $("#message").hide();
+            $("#userrevcontent").show();
 
-            $(".authorinfo").wrapAll('<div class="row well"><div class="row">');
-
-            $("#page-content-wrapper > div:nth-child(1)").append(
-                    '<div class="row col-md-offset-2"><div id="canvas-holder"><canvas id="chart-area" width="300" height="300"/></div></div>');
-
-            var pieData = [];
-            $.each(json.authorinfo, function(name, info)
-            {
-                pieData.push({
-                    "value" : info.commits,
-                    "label" : info.authorname,
-                    "color" : randomRGB(info.authorname)
-                });
-            });
-            var options = {
-                animationSteps : 1,
-                animationEasing : "linear",
-                tooltipTemplate : "<%= label%>:<%= value %>",
-                onAnimationComplete : function()
-                {
-                    this.showTooltip(this.segments, true);
-                },
-                tooltipEvents : [],
-                showTooltips : true
-            };
-            var ctx = document.getElementById("chart-area").getContext("2d");
-            window.myPie = new Chart(ctx).Pie(pieData, options);
+            makePieChart(json);
 
             $.get("template/revision.html?s="+DATENOW, function(revision)
             {
@@ -94,7 +84,7 @@ function sidebar(groupid)
                                       + '</li>');
                       });
             
-                      $(content).append(jqob);
+                      $("#revisionlist").append(jqob);
                   });
               });
         });
@@ -104,10 +94,41 @@ function sidebar(groupid)
     });
 
 }
-
-function showWarning(jqueryselector, text)
+function emptyUserRevision()
 {
-    $("#page-content-wrapper").html("");
+    $("#revisionlist").html("");
+    $("#authortags").html("");
+}
+
+
+function makePieChart(json)
+{
+    var pieData = [];
+    $.each(json.authorinfo, function(name, info)
+    {
+        pieData.push({
+            "value" : info.commits,
+            "label" : info.authorname,
+            "color" : randomRGB(info.authorname)
+        });
+    });
+    var options = {
+        animationSteps : 1,
+        animationEasing : "linear",
+        tooltipTemplate : "<%= label%>:<%= value %>",
+        onAnimationComplete : function()
+        {
+            this.showTooltip(this.segments, true);
+        },
+        tooltipEvents : [],
+        showTooltips : true
+    };
+    var ctx = document.getElementById("chart-area").getContext("2d");
+    window.myPie = new Chart(ctx).Pie(pieData, options);
+}
+
+function showWarning(text)
+{
     $("#warning").show();
     $("#warning>span").html(text);
 }

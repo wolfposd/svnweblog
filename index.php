@@ -31,13 +31,36 @@
     		</div>
     
     		<div id="page-content-wrapper">
-    			<div class="well">HELLO</div>
+    			<div class="well" id="message">HELLO</div>
+    			
+        		<div id="userrevcontent" style="display:none;">
+            		<div class="container-fluid">
+            			<div class="row">
+    	        			<h1 id="groupname"></h1>
+            			</div>
+            			<div class="row">
+        	    			<span id="lastupdatedsvn"></span>
+            			</div>
+            			<div class="row well">
+            				<div class="row" id="authortags">
+            				</div>
+            				<div class="row col-md-offset-2">
+            					<div id="canvas-holder">
+            						<canvas id="chart-area" width="300" height="300"></canvas>
+            					</div>
+            				</div>
+            			</div>
+            			</div>
+            		<div class="container-fluid">
+        				<div id="revisionlist">
+        				</div>
+            		</div>
+        		</div>
+        		
+        		<div class="container">
+        			<div id="warning" class="alert alert-danger text-center" style="display:none;"><strong>Warning!</strong><br><span></span></div>
+        		</div>
     		</div>
-    		
-    		<div class="container">
-    			<div id="warning" class="alert alert-danger text-center" style="display:none;"><strong>Warning!</strong><br><span></span></div>
-    		</div>
-
     	</div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
