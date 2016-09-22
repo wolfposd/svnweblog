@@ -1,7 +1,7 @@
 # SVN Weblog
-Displays your SVN-Log files in a nice way.
+Displays your SVN-Log files in a somewhat nice way.
 
-
+![screenshot1](/screenshot/screen1.png/)
 
 
 
