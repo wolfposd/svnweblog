@@ -7,13 +7,15 @@ Displays your SVN-Log files in a nice way.
 
 ## Setup
 
-Run a cronjob every so often polling svn info:
+- create an 'xml' folder inside the basedir
+- edit svninfo.json to match the svns you like to show
+- Run a cronjob every so often polling svn info and placing it in the xml-folder in your basedir
 
 ```bash
 #!/bin/bash
 
 DESTINATION="~/www/svn/xml"
-SVNBASE="svn+ssh://myurl.com/svn/"
+SVNBASE="svn+ssh://myurl.com/svn/xml/"
 
 function getLog {
         groupid=$1
